@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: portfolio-website
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/tylerpitcher/base-helm-chart
+      targetRevision: 0.3.0
+      path: .
+      helm:
+        valueFiles:
+          - $values/values.yaml
+
+    - repoURL: https://github.com/tylerpitcher/portfolio-website
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+    
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
