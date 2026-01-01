@@ -8,7 +8,7 @@ spec:
 
   sources:
     - repoURL: https://github.com/tylerpitcher/base-helm-chart
-      targetRevision: 0.3.0
+      targetRevision: 0.4.0
       path: .
       helm:
         valueFiles:
