@@ -14,7 +14,7 @@ spec:
         valueFiles:
           - $values/values.yaml
 
-    - repoURL: https://github.com/tylerpitcher/replicar
+    - repoURL: https://github.com/tylerpitcher/shopping-cart
       targetRevision: e2617f4e853c9fafdeba27c347060a98a2170657
       ref: values
 
