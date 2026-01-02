@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: replicar
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/tylerpitcher/base-helm-chart
+      targetRevision: 0.4.0
+      path: .
+      helm:
+        valueFiles:
+          - $values/values.yaml
+
+    - repoURL: https://github.com/tylerpitcher/replicar
+      targetRevision: e2617f4e853c9fafdeba27c347060a98a2170657
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+    
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
